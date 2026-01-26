@@ -8,11 +8,15 @@ A [Yazi](https://github.com/sxyazi/yazi) plugin for automatic session persistenc
 ## Features
 The plugin saves Yazi workspace state on exit and restores it on startup:
  - open tabs with their working directories,
- - sorting mode, linemode, hidden file visibility,
+ - per-tab view settings (sorting mode, linemode, hidden file visibility),
  - active tab selection.
 
-## Setup
+## Installation
+```
+ya pkg add barbanevosa/autosession
+```
 
+## Setup
 Add the following configuration entries to their respective configuration files:
 
 ### init.lua
