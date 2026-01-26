@@ -43,4 +43,7 @@ By default, press `q` to save session and quit.
 > The default `q` keybinding for save-and-quit can be remapped in `keymap.toml`.
 
 ## Acknowledgments
-Special thanks to **Masou Shizuka** ([@MasouShizuka](https://github.com/MasouShizuka)) for creating [projects.yazi](https://github.com/MasouShizuka/projects.yazi), which served as the initial inspiration and learning resource for this plugin.
+Special thanks to **Masou Shizuka** ([@MasouShizuka](https://github.com/MasouShizuka)) for creating **[projects.yazi](https://github.com/MasouShizuka/projects.yazi)**, which served as the initial inspiration and learning resource for this plugin.
+
+## License
+**autosession.yazi** is MIT-licensed. For more information check the [LICENSE](LICENSE) file.
