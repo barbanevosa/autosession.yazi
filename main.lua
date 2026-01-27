@@ -8,8 +8,7 @@ local _get_current_session = ya.sync(function(state)
     }
 
     for idx, tab in ipairs(tabs) do
-        session.tabs[#session.tabs + 1] = {
-            idx = idx,
+        session.tabs[idx] = {
             cwd = tostring(tab.current.cwd):gsub("\\", "/"),
             sort = {
                 by = tab.pref.sort_by,
