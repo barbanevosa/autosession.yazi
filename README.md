@@ -9,7 +9,7 @@ A [Yazi](https://github.com/sxyazi/yazi) plugin for automatic session persistenc
 The plugin saves Yazi workspace state on exit and restores it on startup:
  - Open tabs with their working directories
  - Per-tab view settings: sorting mode, linemode, hidden file visibility
- - Active tab selection
+ - Activate cwd tab: automatically switches to the tab matching the startup directory or creates a new tab if it's not in the saved session
 
 ## Installation
 ```bash

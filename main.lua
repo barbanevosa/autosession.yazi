@@ -34,7 +34,8 @@ end)
 
 -- restore_session
 local _restore_session = ya.sync(function(state)
-  session = state.session
+  local session = state.session
+  local start_cwd = tostring(cx.active.current.cwd):gsub("\\", "/")
 
   for idx, tab in ipairs(session.tabs) do
     if idx == 1 then
@@ -47,8 +48,21 @@ local _restore_session = ya.sync(function(state)
     ya.emit("hidden", { tab.show_hidden })
   end
 
-  ya.emit("tab_switch", { session.active_idx - 1 })
-    
+  -- activate existed tab of cwd or create one if not found
+  local found_idx = nil
+  for idx, tab in ipairs(session.tabs) do
+    if tab.cwd == start_cwd then
+      found_idx = idx
+      break
+    end
+  end
+
+  if found_idx then
+    ya.emit("tab_switch", { found_idx - 1 })
+  else
+    ya.emit("tab_create", { start_cwd })
+  end
+
   state.restored = true
 end)
 
