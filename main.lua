@@ -25,11 +25,28 @@ local _get_current_session = ya.sync(function(state)
   return session
 end)
 
+-- _save
+local _save = ya.sync(function(state)
+  local session = _get_current_session()
+  state.restored = true
+  ps.pub_to(0, state.event, session)
+end)
+
 -- _save_and_quit
 local _save_and_quit = ya.sync(function(state)
-  local session = _get_current_session()
-  ps.pub_to(0, state.event, session)
+  _save()
   ya.emit("quit", {})
+end)
+
+-- _erase
+local _erase = ya.sync(function(state)
+  ps.pub_to(0, state.event, nil)
+end)
+
+-- _erase_and_quit_no_cwd
+local _erase_and_quit_no_cwd = ya.sync(function(state)
+  _erase()
+  ya.emit("quit", { no_cwd_file = true })
 end)
 
 -- restore_session
@@ -69,6 +86,15 @@ return {
     local action = job.args[1]
     if action == "save-and-quit" then
       _save_and_quit()
+    end
+    if action == "save" then
+      _save()
+    end
+    if action == "erase-and-quit-no-cwd" then
+      _erase_and_quit_no_cwd()
+    end
+    if action == "erase" then
+      _erase()
     end
   end,
 }
