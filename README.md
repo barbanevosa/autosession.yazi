@@ -10,6 +10,7 @@ The plugin saves Yazi workspace state on exit and restores it on startup:
  - Open tabs with their working directories
  - Per-tab view settings: sorting mode, linemode, hidden file visibility
  - Active tab selection
+ - Hovered item per tab
 
 ## Installation
 ```bash
