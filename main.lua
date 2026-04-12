@@ -8,6 +8,7 @@ local _get_current_session = ya.sync(function(state)
   }
 
   for idx, tab in ipairs(tabs) do
+    local hovered = tab.current.hovered and tostring(tab.current.hovered.url):gsub("\\", "/") or nil
     session.tabs[idx] = {
       cwd = tostring(tab.current.cwd):gsub("\\", "/"),
       sort = {
@@ -19,6 +20,7 @@ local _get_current_session = ya.sync(function(state)
       },
       linemode = tab.pref.linemode,
       show_hidden = tab.pref.show_hidden and "show" or "hide",
+      hovered = hovered,
     }
   end
 
@@ -34,7 +36,7 @@ end)
 
 -- restore_session
 local _restore_session = ya.sync(function(state)
-  session = state.session
+  local session = state.session
 
   for idx, tab in ipairs(session.tabs) do
     if idx == 1 then
@@ -45,10 +47,13 @@ local _restore_session = ya.sync(function(state)
     ya.emit("sort", tab.sort)
     ya.emit("linemode", { tab.linemode })
     ya.emit("hidden", { tab.show_hidden })
+    if tab.hovered then
+      ya.emit("reveal", { tab.hovered })
+    end
   end
 
   ya.emit("tab_switch", { session.active_idx - 1 })
-    
+
   state.restored = true
 end)
 
